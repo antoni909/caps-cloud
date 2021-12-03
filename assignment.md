@@ -11,18 +11,28 @@ Refer to the CAPS System Overview for a complete review of the application, incl
 ### Required Services
 
 - SNS Topic: pickup which will receive all pickup requests from vendors
+  - node app will PUBLISH an event at some interval
 - SQS Queue (FIFO): packages which will contain all delivery requests from vendors, in order of receipt.
+
+  - when vendor publishes, enqueue messeage into packages queue
+
 Subscribe this queue to the pickup topic so all pickups are ordered
+
 - SQS Queue (Standard) for each vendor (named for the vendor) which will contain all delivery notifications from the drivers
+
 Operations
+  a delivered queue for each vendor (ex: 1800-queue)
+  each time the driver delivers a package, that vendors queue will receive the completed job
 
 Vendors:
 
 - Vendors will post “pickup” messages containing delivery information into the SNS pickup topic
 { orderId: 1234, customer: "Jane Doe", vendorId: queueArn}
 Note the queueArn – this refers to the AWS ‘arn’ of the vendor’s specific delivered queue
+
 - Pickup requests should be moved into a FIFO queue called packages for the drivers automatically
 (Make the packages queue a subscriber to the pickup topic)
+
 - Vendors should separately subscribe to their personal SQS queue and periodically poll the queue to see delivery notifications
 
 Drivers:
