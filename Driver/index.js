@@ -1,17 +1,17 @@
 'use strict'
-// Consume Package_Queue Messages
+// Consume Package_Queue JSON Messages
 const { Consumer } = require('sqs-consumer')
 // need Package_Queue url 
 const app = Consumer.create({
   queueUrl: 'https://sqs.us-west-2.amazonaws.com/872892230630/Package_Queue',
   handleMessage: handleMessage
 })
-
-const polledMessages = [] 
+const polledMessage = [] 
 
 function handleMessage(message){
+  //JSON Message
   const { Message } = JSON.parse(message.Body)
-  polledMessages.push(Message)
+  polledMessage.push(Message)
   console.log('*** Message: ', Message)
   console.log('*** polledMessages: ', Message)
 }
@@ -25,3 +25,5 @@ app.on('processing_error', (err) => {
 
 // poll the queue
 app.start()
+
+module.exports = { polledMessage: polledMessage }
