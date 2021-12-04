@@ -6,6 +6,10 @@
 
 ![UML](assets/caps-cloud.jpg)
 
+## Sample
+
+![UML](assets/sample.jpeg)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
