@@ -7,7 +7,7 @@ const sns = new AWS.SNS()
 const handleMessage = (message) => {
   const { Message } = JSON.parse(message.Body)
   const parsedMessage = JSON.parse(Message)
-  console.log(`2. Driver in transit with package for customer ${parsedMessage.customer}`)
+  console.log('2. Driver in transit with package',parsedMessage)
 
   const payload = {
     Message: Message,
