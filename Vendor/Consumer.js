@@ -13,7 +13,7 @@ const app = Consumer.create({
 function handleMessage(message){
   const { Message } = JSON.parse(message.Body)
   const parsedMessage = JSON.parse(Message)
-  console.log(`4. Vendor recieved package for ${parsedMessage.customer}`)
+  console.log(`4. Vendor ${parsedMessage.company.toUpperCase()} recieved package for ${parsedMessage.customer}`)
 }
 app.on('error', (err) => {console.log('*** err ', err)})
 app.on('processing_error', (err) => {console.log('*** err ', err)})
